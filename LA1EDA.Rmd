@@ -1,0 +1,312 @@
+---
+title: "LA1_EDA"
+author: "samprita(1NT20IS143),Smiti G kalmady(1NT20IS163)"
+date: "`r Sys.Date()`"
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
+---
+#Loading the dataset
+```{r}
+credit_card<-read.csv("creditcard.csv")
+```
+#head of the data
+```{r}
+head(credit_card)
+```
+#tail of the dataset 
+```{r}
+tail(credit_card)
+```
+#assigning to the variable
+```{r}
+amount<-credit_card$Amount
+```
+#sum of the dataset
+```{r}
+sum(amount)
+```
+#mean of the dataset
+```{r}
+mean(amount)
+```
+#variance of the dataset
+```{r}
+var(amount)
+```
+#standard deviation of the dataset
+```{r}
+sd(amount)
+```
+#median of the dataset
+```{r}
+median(amount)
+```
+#median absolute deviation
+```{r}
+mad(amount)
+```
+#listing the files of dataset
+```{r}
+ls()
+```
+#min and max of dataset
+```{r}
+min(credit_card$Amount)
+max(credit_card$Amount)
+```
+
+
+#structure of data set
+```{r}
+str(credit_card)
+```
+
+#Calculate the total number of rows in the dataset
+```{r}
+summary(credit_card)
+```
+#Calculate the total number of rows in the dataset:
+```{r}
+nrow(credit_card)
+```
+#Calculate the total number of columns in the dataset:
+```{r}
+ncol(credit_card)
+```
+#Filter the dataset to include only rows that meet a certain condition:
+```{r}
+filtered_data <- credit_card[credit_card$Amount > 100, ]
+print(filtered_data)
+
+```
+#Sort the dataset based on a specific column:
+```{r}
+sorted_data <- credit_card[order(credit_card$Amount), ]
+print(sorted_data)
+```
+
+#Count the number of occurrences of unique values in a specific column:
+```{r}
+table(credit_card$Amount)
+```
+#Calculate the percentage of missing values in each column:
+```{r}
+colMeans(is.na(credit_card)) * 100
+```
+
+#Convert a column to a factor with custom levels:
+```{r}
+credit_card$Amount <- factor(credit_card$Amount, levels = c("level1", "level2", "level3"))
+```
+
+#Remove duplicate rows:
+```{r}
+credit_card1 <- unique(credit_card)
+print(credit_card1)
+```
+
+#Rename a column in the dataset:
+```{r}
+names(credit_card)[2] <- "v_2"
+credit_card$v_2
+
+```
+#Create a new column that is the sum of two existing columns:
+```{r}
+library(dplyr)
+new_data <- transmute(credit_card, sum_column = v_2 + V3)
+print(new_data)
+```
+```{r}
+arrange(credit_card,V5, V2)
+```
+#sort the dataset
+```{r}
+library(dplyr)
+sorted_data <- arrange(credit_card, Amount)
+print(sorted_data)
+```
+
+#matrix of the dataset
+ 
+```{r}
+matrix <- matrix(credit_card$V4,nrow=20,ncol=20)
+print(matrix)
+```
+## 37) dataframe creation
+ 
+```{r}
+s_vector = credit_card$Amount
+t_vector = credit_card$Time
+df <- data.frame(col1=credit_card$Time,col2=credit_card$V10)
+print(head(df))
+```
+## checking if factor
+```{r}
+print(is.factor(credit_card))
+```
+
+##viewing only matching package names
+ 
+```{r}
+ls(pattern = 'f')
+```
+##  removing packages
+ 
+```{r}
+rm(list = ls(pattern = 'dfa'))
+ls()
+```
+
+## 55) to view previously executed commands
+ 
+```{r}
+#history()
+```
+
+## 57) defining a function
+```{r}
+cool_function <- function(x) {
+  x <- x*5
+  return(x)
+ 
+}
+```
+
+## 58) print object type of function
+```{r}
+cool_function <- function(x) {
+  x <- x*5
+  return(x)
+}
+typeof(cool_function)
+```
+
+
+
+##Convert Dataframe into matrix
+ 
+```{r}
+ 
+df1 <- data.frame(col1=credit_card$V3,col2=credit_card$V3,col3=credit_card$V4)
+ 
+df2.mat=as.matrix(df1)
+ 
+print(head(df2.mat))
+```
+#Convert Matrix into dataframe
+ 
+```{r}
+cmat= cbind(credit_card$V10,credit_card$V11)
+mat2frame=as.data.frame(cmat)
+print(head(mat2frame))
+```
+
+
+# dataframe to list
+ 
+```{r}
+frame.list=as.list(credit_card$Time)
+print(head(frame.list))
+```
+# converting data frame to stack
+```{r}
+stackdf <- data.frame(pop=credit_card$Amount,y=credit_card$Time)
+stackdf.stack=stack(stackdf)
+print(head(stackdf.stack))
+ 
+```
+
+#unstack of a stack
+```{r}
+unstack(stackdf.stack)
+```
+ 
+## saving data files to disk
+```{r}
+save(list = ls(pattern = 'r'), file = "C:\\Users\\Samprita\\Downloads\\credit card\\edala1.Rmd")
+```
+## reading data files from disk
+```{r}
+load(file='edala1.Rmd')
+```
+
+ 
+## finding data on disk
+```{r}
+dir()
+```
+ 
+##pie chart
+```{r}
+pie(credit_card$Time,credit_card$Amount)
+```
+
+#exponential growth
+```{r}
+df.exp <- exp(df1$col1)
+print(head(df.exp))
+```
+## logrithm
+```{r}
+df.exp <- log(df1$col1)
+print(head(df.exp))
+```
+
+## scaling a matrix
+```{r}
+scale(matrix)
+```
+## 100)changing row and column values of a matrix
+```{r}
+print(head(matrix))
+mat2 = sweep(x = matrix, MARGIN = 1,STATS = 5, FUN = "+")
+print(head(mat2))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
